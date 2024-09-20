@@ -76,6 +76,9 @@ body{
 .volume{
     padding: 0;
 }
+.graph{
+  margin-top: 100px;
+}
 /*generated with Input range slider CSS style generator (version 20211225)
 https://toughengineer.github.io/demo/slider-styler*/
 input[type=range].volume {

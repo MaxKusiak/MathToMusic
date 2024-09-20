@@ -1,7 +1,7 @@
-let tonality = 0, func = 0, mode = 0, proMode = 0, timeSignatureIndex = 0, volume = 0; //canPlay = false;
+let tonality = 0, func = 0, mode = 0, proMode = 0, timeSignatureIndex = 0, volume = 0, a = 0, b = 0, t = 0; //canPlay = false;
 let gammaInd = -1;
 let globalI = 0, sign = 0, i = 0, timeSignature = 0, timeSignatureDifference = 0;
-let numbers = 0, answer = 0, timeSignatureCalc = 0;
+let numbers = 0, numbers1 = 0, numbers2 = 0, answer = 0, timeSignatureCalc = 0;
 let gamma = "", melodyString = "", notes = "", melodyTimeString = "", errorString = "";
 let step = 0;
 let isBassAvailable = true;
@@ -22,6 +22,7 @@ let mainTonesD2 = ["", "GIS", "", "AIS", "", "BIS", "CIS", "", "DIS", "", "EIS",
 let mainTonesB2 = ["", "AS", "", "BES", "CES", "", "DES", "", "ES", "FES", "", "GES"];
 let notesInLetters = ["0G", "0G#", "0A", "0A#", "0B", "1C", "1C#", "1D", "1D#", "1E", "1F", "1F#", "1G", "1G#", "1A", "1A#", "1B", "2C", "2C#", "2D", "2D#", "2E", "2F", "2F#", "2G", "2G#", "2A", "2A#"];
 let signatureNumbers = [0.25, 0.5, 1, 2, 0.75, 1.25, 1.5, 1.75];
+let functions = [x => x**2, x => x**0.5, x => 1/x];
 let m = [];
 
 document.querySelector(".volume").addEventListener("change", (event) => {
@@ -33,6 +34,57 @@ for (let e of document.querySelectorAll('input[type="range"].slider-progress')) 
     e.style.setProperty('--min', e.min == '' ? '0' : e.min);
     e.style.setProperty('--max', e.max == '' ? '100' : e.max);
     e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+}
+
+function drawGraph(number1, number2, step){
+    let y = functions[func - 1];
+
+    let z = 40; 
+    let c = document.querySelector('canvas');
+    let ctx = c.getContext('2d');
+    
+    c.width = c.width;
+
+    // ctx.translate(c.width / 2, c.height - 6);
+    ctx.translate(c.width / 2, c.height / 2);
+    
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -c.height);
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, c.height);
+    // ctx.moveTo(-5, 0);
+    // ctx.lineTo(5, 0);
+    ctx.moveTo(-c.width / 2, 0);
+    ctx.lineTo(c.width / 2, 0);
+    ctx.stroke();
+
+    // ctx.beginPath();
+    // ctx.moveTo(-5, -1*z);
+    // ctx.lineTo(5, -1*z);
+    // ctx.moveTo(1*z, -5);
+    // ctx.lineTo(1*z, 5);
+    // ctx.stroke();
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    a = -(number1 + step * t);
+    b = -y(number1 + step * t);
+    if(step > 0){
+        for (let j = number1; j <= (number2 + step * t) - 0.1; j = parseFloat((j + 0.1).toFixed(1))) {
+            ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
+            ctx.lineTo((j + 0.1)*z + a*z, -(y(j + 0.1)*z + b*z));
+        }
+    }else if(step < 0){
+        for (let j = number1; j >= (number2 + step * t) - 0.1; j = parseFloat((j - 0.1).toFixed(1))) {
+            ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
+            ctx.lineTo((j + 0.1)*z + a*z, -(y(j + 0.1)*z + b*z));
+        }
+    }
+    t++;
+    ctx.stroke();
 }
 
 // робить такти
@@ -117,6 +169,7 @@ document.querySelector(".button").addEventListener('click', () => {
     if(Number.isNaN(numbers)){
         errorString += "Lower limit of the input data must be a number.<br>";
     }
+    numbers1 = numbers;
     step = parseFloat(document.querySelector(".step").value);
     if(Number.isNaN(step)){
         errorString += "Step must be a number.<br>";
@@ -182,10 +235,11 @@ async function playNotesInSequence() {
         //     MIDI.noteOff(0, allNotes[modes[mode - 1][parseInt(notes[i])]], temp[parseInt(melodyTimeString[i])] / 1000);
         // }, delay);
         // delay = 1000;
-        m.push(allNotes[modes[mode - 1][parseInt(notes[i])]]);
+        // m.push(allNotes[modes[mode - 1][parseInt(notes[i])]]);
         await playNoteWithDelay(allNotes[modes[mode - 1][parseInt(notes[i])]], temp[parseInt(melodyTimeString[i])]);  // Очікування завершення програвання кожної ноти
+        drawGraph(numbers1, numbers2, step);
     }
-    console.log(m);
+    // console.log(m);
 }
 
 // починає обробляти мелодію
@@ -200,6 +254,7 @@ function play() {
     globalI = 0;
     modes = [[0, 2, 4, 5, 7, 9, 11, 12, 14, 16],  
              [0, 2, 3, 5, 7, 8, 10, 12, 14, 15]];
+    t = 0;
 
     if (mainTones.indexOf(gamma) != -1) {
         gammaInd = mainTones.indexOf(gamma);
@@ -285,5 +340,7 @@ function play() {
         }
         numbers += step;
     }
+    numbers2 = numbers;
+    drawGraph(numbers1, numbers2, step);
     playNotesInSequence();
 };
