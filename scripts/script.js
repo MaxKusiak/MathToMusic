@@ -72,15 +72,22 @@ function drawGraph(number1, number2, step){
     ctx.beginPath();
     a = -(number1 + step * t);
     b = -y(number1 + step * t);
+    // if(func == 3 && y(j) < 0 && y(j + 0.1) > 0){
+    //     t++;
+    //     a = -(number1 + step * (t + 1));
+    //     b = -y(number1 + step * (t + 1));
+    // }
+    // a = -(number1 + step * (t + 1));
+    // b = -y(number1 + step * (t + 1));
     if(step > 0){
         for (let j = number1; j <= (number2 + step * t) - 0.1; j = parseFloat((j + 0.1).toFixed(1))) {
-            ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
-            ctx.lineTo((j + 0.1)*z + a*z, -(y(j + 0.1)*z + b*z));
+                ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
+                ctx.lineTo((j + 0.1)*z + a*z, -(y(j + 0.1)*z + b*z));
         }
     }else if(step < 0){
-        for (let j = number1; j >= (number2 + step * t) - 0.1; j = parseFloat((j - 0.1).toFixed(1))) {
-            ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
-            ctx.lineTo((j + 0.1)*z + a*z, -(y(j + 0.1)*z + b*z));
+        for (let j = number1; j >= (number2 + step * t) + 0.1; j = parseFloat((j - 0.1).toFixed(1))) {
+                ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
+                ctx.lineTo((j - 0.1)*z + a*z, -(y(j - 0.1)*z + b*z));
         }
     }
     t++;
@@ -199,10 +206,12 @@ document.querySelector(".button").addEventListener('click', () => {
     // console.log(func, gamma, mode, time, numbers, step, sign, timeSignature, volume, temp[2]);
     if(errorString != ""){
         // canPlay = false;
+        document.querySelector(".errorText").style.display = "flex";
         document.querySelector(".errorText").innerHTML = errorString;
         errorString = "";
     }else{
         // canPlay = true;
+        document.querySelector(".errorText").style.display = "none";
         document.querySelector(".errorText").innerHTML = "";
         MIDI.loadPlugin({
             soundfontUrl: "./soundfont/",
@@ -279,6 +288,7 @@ function play() {
     if (func == 2) {
         if (numbers < 0) {
             numbers = -numbers;
+            numbers1 = numbers;
         }
         if (step < 0) {
             step = -step;
@@ -286,8 +296,10 @@ function play() {
     } else if (func == 3) {
         if (numbers == 0 && step > 0) {
             numbers = 1;
+            numbers1 = 1;
         } else if (numbers == 0 && step < 0) {
             numbers = -1;
+            numbers2 = -1;
         }
     }
 
