@@ -1,221 +1,334 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
+
 @font-face {
-    font-family: "Itim";
-    src:
-        url("../fonts/Itim-Regular.ttf");
+  font-family: "Itim";
+  src:
+    url("../fonts/Itim-Regular.ttf");
 }
-.block{
-    display: flex;
-    flex-direction: column;
+
+.block {
+  display: flex;
+  flex-direction: column;
 }
-body{
-    /* display: flex;
+
+body {
+  /* display: flex;
     flex-direction: column;
     padding-left: 50px; */
-    background-color: #4A4458;
-    font-family: 'Itim';
-    display: flex;
-    padding: 18px 0 18px 18px;
+  background-color: #4A4458;
+  font-family: 'Itim';
+  display: flex;
+  padding: 18px 0 18px 18px;
 }
-.global{
+
+.global {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 1162px;
+  width: 2000px;
 }
-.title{
-    background-color: #D9D9D9;
-    font-size: 96px;
-    width: 958px;
-    height: 132px;
-    border-radius: 20px;
-    text-align: center;
-    line-height: 132px;
-    /* margin: 0 auto; */
+
+.title {
+  background-color: #D9D9D9;
+  font-size: 96px;
+  width: 958px;
+  height: 132px;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 132px;
 }
-.inputs{
-    background-color: #D9D9D9;
-    border-radius: 20px;
-    font-size: 24px;
-    /* margin-right: 116px; */
-    height: calc(100vh - 36px);
-    /* height: 1012px; */
-    width: 740px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 94px 0 94px;
-    box-sizing: border-box;
-    align-items: center;
+
+.title1 {
+  display: none;
 }
-.inputs select, input{
-    width: 552px;
-    height: 34px;
-    line-height: 34px;
-    box-sizing: border-box;
-    margin-bottom: 13px;
-    font-family: 'Itim';
-    font-size: 26px;
-    border-radius: 7px;
-    border: none;
-    outline: none;
-    padding-left: 10px;
-    background-color: white;
+
+.inputs {
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  font-size: 26px;
+  /* margin-right: 116px; */
+  height: calc(100vh - 36px);
+  /* height: 1012px; */
+  /* width: 740px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 94px;
+  box-sizing: border-box;
+  align-items: center;
 }
-.button{
-    width: 339px;
-    height: 46px;
-    line-height: 46px;
-    padding: 0;
-    background-color: #5F5F5F;
-    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.25);
-    color: white;
-    /* margin: 0 auto; */
+
+.inputs select,
+input {
+  width: 552px;
+  height: 34px;
+  line-height: 34px;
+  box-sizing: border-box;
+  margin-bottom: 13px;
+  font-family: 'Itim';
+  font-size: 26px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+  background-color: white;
 }
-.button:hover{
-    cursor: pointer;
+
+.button {
+  width: 339px;
+  height: 46px;
+  line-height: 46px;
+  padding: 0;
+  margin: 0;
+  background-color: #5F5F5F;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.25);
+  color: white;
+  /* margin: 0 auto; */
 }
-.text{
-    margin-bottom: 5px;
+
+.button:hover {
+  cursor: pointer;
 }
-.volume{
-    padding: 0;
+
+.text {
+  margin-bottom: 5px;
 }
-.graph{
+
+.volume {
+  padding: 0;
+}
+
+.graph {
   margin-top: 100px;
   /* width: 958px;
   height: 500px; */
 }
-.graphBlock{
+
+.graphBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 /*generated with Input range slider CSS style generator (version 20211225)
 https://toughengineer.github.io/demo/slider-styler*/
 input[type=range].volume {
-    height: 18px;
-    -webkit-appearance: none;
-  }
-  
-  /*progress support*/
-  input[type=range].volume.slider-progress {
-    --range: calc(var(--max) - var(--min));
-    --ratio: calc((var(--value) - var(--min)) / var(--range));
-    --sx: calc(0.5 * 26px + var(--ratio) * (100% - 26px));
-  }
-  
-  input[type=range].volume:focus {
-    outline: none;
-  }
-  
-  /*webkit*/
-  input[type=range].volume::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 26px;
-    height: 26px;
-    border-radius: 1em;
-    background: #4A4458;
-    border: none;
-    box-shadow: -4px 0 4px #000000;
-    margin-top: calc(18px * 0.5 - 26px * 0.5);
-  }
-  
-  input[type=range].volume::-webkit-slider-runnable-track {
-    height: 18px;
-    border: none;
-    border-radius: 7px;
-    background: #FFFFFF;
-    box-shadow: none;
-  }
-  
-  input[type=range].volume.slider-progress::-webkit-slider-runnable-track {
-    background: linear-gradient(#4A4458,#4A4458) 0/var(--sx) 100% no-repeat, #FFFFFF;
-  }
-  
-  /*mozilla*/
-  input[type=range].volume::-moz-range-thumb {
-    width: 26px;
-    height: 26px;
-    border-radius: 1em;
-    background: #4A4458;
-    border: none;
-    box-shadow: -4px 0 4px #000000;
-  }
-  
-  input[type=range].volume::-moz-range-track {
-    height: 18px;
-    border: none;
-    border-radius: 7px;
-    background: #FFFFFF;
-    box-shadow: none;
-  }
-  
-  input[type=range].volume.slider-progress::-moz-range-track {
-    background: linear-gradient(#4A4458,#4A4458) 0/var(--sx) 100% no-repeat, #FFFFFF;
-  }
-  
-  /*ms*/
-  input[type=range].volume::-ms-fill-upper {
-    background: transparent;
-    border-color: transparent;
-  }
-  
-  input[type=range].volume::-ms-fill-lower {
-    background: transparent;
-    border-color: transparent;
-  }
-  
-  input[type=range].volume::-ms-thumb {
-    width: 26px;
-    height: 26px;
-    border-radius: 1em;
-    background: #4A4458;
-    border: none;
-    box-shadow: -4px 0 4px #000000;
-    margin-top: 0;
-    box-sizing: border-box;
-  }
-  
-  input[type=range].volume::-ms-track {
-    height: 18px;
-    border-radius: 7px;
-    background: #FFFFFF;
-    border: none;
-    box-shadow: none;
-    box-sizing: border-box;
-  }
-  
-  input[type=range].volume.slider-progress::-ms-fill-lower {
-    height: 18px;
-    border-radius: 7px 0 0 7px;
-    margin: -undefined 0 -undefined -undefined;
-    background: #4A4458;
-    border: none;
-    border-right-width: 0;
-  }
-  
-.errorText{
-    font-size: 26px;
-    color: black;
-    text-align: center;
-    /* position: fixed; */
-    width: 500px;
-    height: 300px;
-    background-color: #878787;
-    border: solid 2px black;
-    border-radius: 20px;
-    /* top: calc(50% - 150px); */
-    /* left: calc(50% - 250px); */
-    margin-top: 100px;
-    display: none;
-    align-items: center;
-    justify-content: center;
+  height: 18px;
+  -webkit-appearance: none;
 }
 
-@media (max-width: 1000px){
-  
+/*progress support*/
+input[type=range].volume.slider-progress {
+  --range: calc(var(--max) - var(--min));
+  --ratio: calc((var(--value) - var(--min)) / var(--range));
+  --sx: calc(0.5 * 26px + var(--ratio) * (100% - 26px));
+}
+
+input[type=range].volume:focus {
+  outline: none;
+}
+
+/*webkit*/
+input[type=range].volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 1em;
+  background: #4A4458;
+  border: none;
+  box-shadow: -4px 0 4px #000000;
+  margin-top: calc(18px * 0.5 - 26px * 0.5);
+}
+
+input[type=range].volume::-webkit-slider-runnable-track {
+  height: 18px;
+  border: none;
+  border-radius: 7px;
+  background: #FFFFFF;
+  box-shadow: none;
+}
+
+input[type=range].volume.slider-progress::-webkit-slider-runnable-track {
+  background: linear-gradient(#4A4458, #4A4458) 0/var(--sx) 100% no-repeat, #FFFFFF;
+}
+
+/*mozilla*/
+input[type=range].volume::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 1em;
+  background: #4A4458;
+  border: none;
+  box-shadow: -4px 0 4px #000000;
+}
+
+input[type=range].volume::-moz-range-track {
+  height: 18px;
+  border: none;
+  border-radius: 7px;
+  background: #FFFFFF;
+  box-shadow: none;
+}
+
+input[type=range].volume.slider-progress::-moz-range-track {
+  background: linear-gradient(#4A4458, #4A4458) 0/var(--sx) 100% no-repeat, #FFFFFF;
+}
+
+/*ms*/
+input[type=range].volume::-ms-fill-upper {
+  background: transparent;
+  border-color: transparent;
+}
+
+input[type=range].volume::-ms-fill-lower {
+  background: transparent;
+  border-color: transparent;
+}
+
+input[type=range].volume::-ms-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 1em;
+  background: #4A4458;
+  border: none;
+  box-shadow: -4px 0 4px #000000;
+  margin-top: 0;
+  box-sizing: border-box;
+}
+
+input[type=range].volume::-ms-track {
+  height: 18px;
+  border-radius: 7px;
+  background: #FFFFFF;
+  border: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+input[type=range].volume.slider-progress::-ms-fill-lower {
+  height: 18px;
+  border-radius: 7px 0 0 7px;
+  margin: -undefined 0 -undefined -undefined;
+  background: #4A4458;
+  border: none;
+  border-right-width: 0;
+}
+
+.errorText {
+  font-size: 26px;
+  color: black;
+  text-align: center;
+  /* position: fixed; */
+  width: 500px;
+  height: 300px;
+  background-color: #878787;
+  border: solid 2px black;
+  border-radius: 20px;
+  /* top: calc(50% - 150px); */
+  /* left: calc(50% - 250px); */
+  margin-top: 100px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1743px) {
+  .inputs {
+    padding: 0 46px;
+  }
+}
+
+@media (max-width: 1644px) {
+  .inputs {
+    padding: 0 60px;
+  }
+
+  .title2,
+  .graphBlock,
+  .graph {
+    width: 850px;
+  }
+}
+
+@media (max-width: 1556px) {
+  .inputs {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 1495px) {
+
+  .title2,
+  .graphBlock,
+  .graph {
+    width: 720px;
+  }
+}
+
+@media (max-width: 1370px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+  }
+
+  .inputs,
+  .title,
+  .title2,
+  .graphBlock,
+  .graph,
+  .global {
+    width: 1000px;
+  }
+
+  .inputs {
+    padding: 0;
+    font-size: 28px;
+  }
+
+  .inputs select,
+  input {
+    width: 650px;
+    height: 38px;
+    line-height: 38px;
+    margin-bottom: 16px;
+    font-size: 28px;
+  }
+
+  .title1 {
+    display: block;
+    margin-bottom: 50px;
+  }
+
+  .title2 {
+    display: none;
+  }
+}
+
+@media (max-width: 1039px){
+  .title1,
+  .graphBlock,
+  .global,
+  .inputs,
+  .graph {
+    width: 800px;
+  }
+}
+
+@media (max-height: 931px){
+  .inputs {
+    font-size: 24px;
+  }
+
+  .inputs select,
+  input {
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 11px;
+    font-size: 24px;
+  }
 }
