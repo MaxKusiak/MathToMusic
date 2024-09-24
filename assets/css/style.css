@@ -332,3 +332,11 @@ input[type=range].volume.slider-progress::-ms-fill-lower {
     font-size: 24px;
   }
 }
+
+@media (max-height: 855px){
+  .inputs{
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
