@@ -235,6 +235,9 @@ input[type=range].volume.slider-progress::-ms-fill-lower {
   align-items: center;
   justify-content: center;
 }
+.playButton{
+  margin-bottom: 10px;
+}
 
 @media (max-width: 1743px) {
   .inputs {
@@ -319,7 +322,7 @@ input[type=range].volume.slider-progress::-ms-fill-lower {
   }
 }
 
-@media (max-height: 931px){
+@media (max-height: 978px){
   .inputs {
     font-size: 24px;
   }
@@ -333,7 +336,7 @@ input[type=range].volume.slider-progress::-ms-fill-lower {
   }
 }
 
-@media (max-height: 855px){
+@media (max-height: 910px){
   .inputs{
     height: auto;
     padding-top: 15px;

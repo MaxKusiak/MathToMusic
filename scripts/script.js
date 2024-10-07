@@ -1,5 +1,6 @@
 let tonality = 0, func = 0, mode = 0, proMode = 0, timeSignatureIndex = 0, volume = 0, a = 0, b = 0, t = 0; //canPlay = false;
 let gammaInd = -1;
+let stopAudio = 0, isPlay = 0;
 let globalI = 0, sign = 0, i = 0, timeSignature = 0, timeSignatureDifference = 0;
 let numbers = 0, numbers1 = 0, numbers2 = 0, answer = 0, timeSignatureCalc = 0;
 let gamma = "", melodyString = "", notes = "", melodyTimeString = "", errorString = "";
@@ -28,6 +29,12 @@ let m = [];
 document.querySelector(".volume").addEventListener("change", (event) => {
     document.querySelector(".volumeShow").innerHTML = `Volume: ${event.target.value}`;
 });
+
+function stopAudioFunc(){
+    if(isPlay == 1){
+        stopAudio = 1;
+    }
+}
 
 for (let e of document.querySelectorAll('input[type="range"].slider-progress')) {
     e.style.setProperty('--value', e.value);
@@ -162,68 +169,70 @@ function superCut(index) {
 
 
 // збирає значення з інпутів
-document.querySelector(".button").addEventListener('click', () => {
-    func = parseInt(document.querySelector(".func").value);
-    gamma = document.querySelector(".gamma").value;
-    mode = parseInt(document.querySelector(".mode").value);
-    time = parseInt(document.querySelector(".time").value) * 1000;
-    if(time < 0){
-        errorString += "Time can't be less than zero.<br>";
-    }else if(Number.isNaN(time)){
-        errorString += "Time must be a number.<br>";
-    }
-    numbers = parseFloat(document.querySelector(".numbers").value);
-    if(Number.isNaN(numbers)){
-        errorString += "Lower limit of the input data must be a number.<br>";
-    }
-    numbers1 = numbers;
-    step = parseFloat(document.querySelector(".step").value);
-    if(Number.isNaN(step)){
-        errorString += "Step must be a number.<br>";
-    }
-    sign = parseInt(document.querySelector(".sign").value);
-    if(Number.isNaN(sign)){
-        errorString += "Sign must be a number.<br>";
-    }else if(sign < 0){
-        errorString += "Sign can't be less than zero.<br>";
-    }
-    timeSignature = parseInt(document.querySelector(".timeSignature").value);
-    volume = parseInt(document.querySelector(".volume").value);
-    temp[2] = parseInt(60000 / parseInt(document.querySelector(".temp").value));
-    if(Number.isNaN(temp[2])){
-        errorString += "Temp must be a number.<br>";
-    }else if(temp[2] < 1){
-        errorString += "Temp can't be less than one.<br>";
-    }else{
-        temp[0] = parseInt(temp[2] / 4);
-        temp[1] = parseInt(temp[2] / 2);
-        temp[3] = temp[2] * 2;
-        temp[4] = temp[0] + temp[1];
-        temp[5] = temp[2] + temp[0];
-        temp[6] = temp[2] + temp[1];
-        temp[7] = temp[2] + temp[1] + temp[0];
-    }
-    // console.log(func, gamma, mode, time, numbers, step, sign, timeSignature, volume, temp[2]);
-    if(errorString != ""){
-        // canPlay = false;
-        document.querySelector(".errorText").style.display = "flex";
-        document.querySelector(".errorText").innerHTML = errorString;
-        errorString = "";
-    }else{
-        // canPlay = true;
-        document.querySelector(".errorText").style.display = "none";
-        document.querySelector(".errorText").innerHTML = "";
-        MIDI.loadPlugin({
-            soundfontUrl: "./soundfont/",
-            instruments: ["acoustic_grand_piano", "synth_drum"],
-            onprogress: function (state, progress) {
-                console.log(state, progress);
-            },
-            onsuccess: function () {
-                MIDI.programChange(0, MIDI.GM.byName["acoustic_grand_piano"].number);
-                play();
-            }
-        });
+document.querySelector(".playButton").addEventListener('click', () => {
+    if(isPlay == 0){
+        func = parseInt(document.querySelector(".func").value);
+        gamma = document.querySelector(".gamma").value;
+        mode = parseInt(document.querySelector(".mode").value);
+        time = parseInt(document.querySelector(".time").value) * 1000;
+        if(time < 0){
+            errorString += "Time can't be less than zero.<br>";
+        }else if(Number.isNaN(time)){
+            errorString += "Time must be a number.<br>";
+        }
+        numbers = parseFloat(document.querySelector(".numbers").value);
+        if(Number.isNaN(numbers)){
+            errorString += "Lower limit of the input data must be a number.<br>";
+        }
+        numbers1 = numbers;
+        step = parseFloat(document.querySelector(".step").value);
+        if(Number.isNaN(step)){
+            errorString += "Step must be a number.<br>";
+        }
+        sign = parseInt(document.querySelector(".sign").value);
+        if(Number.isNaN(sign)){
+            errorString += "Sign must be a number.<br>";
+        }else if(sign < 0){
+            errorString += "Sign can't be less than zero.<br>";
+        }
+        timeSignature = parseInt(document.querySelector(".timeSignature").value);
+        volume = parseInt(document.querySelector(".volume").value);
+        temp[2] = parseInt(60000 / parseInt(document.querySelector(".temp").value));
+        if(Number.isNaN(temp[2])){
+            errorString += "Temp must be a number.<br>";
+        }else if(temp[2] < 1){
+            errorString += "Temp can't be less than one.<br>";
+        }else{
+            temp[0] = parseInt(temp[2] / 4);
+            temp[1] = parseInt(temp[2] / 2);
+            temp[3] = temp[2] * 2;
+            temp[4] = temp[0] + temp[1];
+            temp[5] = temp[2] + temp[0];
+            temp[6] = temp[2] + temp[1];
+            temp[7] = temp[2] + temp[1] + temp[0];
+        }
+        // console.log(func, gamma, mode, time, numbers, step, sign, timeSignature, volume, temp[2]);
+        if(errorString != ""){
+            // canPlay = false;
+            document.querySelector(".errorText").style.display = "flex";
+            document.querySelector(".errorText").innerHTML = errorString;
+            errorString = "";
+        }else{
+            // canPlay = true;
+            document.querySelector(".errorText").style.display = "none";
+            document.querySelector(".errorText").innerHTML = "";
+            MIDI.loadPlugin({
+                soundfontUrl: "./soundfont/",
+                instruments: ["acoustic_grand_piano", "synth_drum"],
+                onprogress: function (state, progress) {
+                    console.log(state, progress);
+                },
+                onsuccess: function () {
+                    MIDI.programChange(0, MIDI.GM.byName["acoustic_grand_piano"].number);
+                    play();
+                }
+            });
+        }
     }
 });
 
@@ -238,6 +247,7 @@ function playNoteWithDelay(note, duration) {
     });
 }
 async function playNotesInSequence() {
+    isPlay = 1;
     for (let i = 0; i < melodyTimeString.length; i++){
         // setTimeout(() => {
         //     MIDI.noteOn(0, allNotes[modes[mode - 1][parseInt(notes[i])]], 127, 0);
@@ -245,9 +255,15 @@ async function playNotesInSequence() {
         // }, delay);
         // delay = 1000;
         // m.push(allNotes[modes[mode - 1][parseInt(notes[i])]]);
-        await playNoteWithDelay(allNotes[modes[mode - 1][parseInt(notes[i])]], temp[parseInt(melodyTimeString[i])]);  // Очікування завершення програвання кожної ноти
-        drawGraph(numbers1, numbers2, step);
+        if(stopAudio == 0){
+            await playNoteWithDelay(allNotes[modes[mode - 1][parseInt(notes[i])]], temp[parseInt(melodyTimeString[i])]);  // Очікування завершення програвання кожної ноти
+            drawGraph(numbers1, numbers2, step);
+        }else{
+            stopAudio = 0;
+            break;
+        }
     }
+    isPlay = 0;
     // console.log(m);
 }
 
