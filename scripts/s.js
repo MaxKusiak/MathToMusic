@@ -6,8 +6,4 @@
 // let m = document.querySelectorAll(".dwSJ2e");
 // let m2 = [];
 // m.forEach(item => m2.push(item.innerHTML));
-document.querySelector("body").innerHTML += '<button class="aboba">ABOBA</button>';
-document.querySelector(".aboba").addEventListener("click", () => {
-    alert("aboba");
-});
-// console.log(m2);
+console.log(Math.cbrt(4, 3));
