@@ -319,21 +319,28 @@ function play() {
         }
     }
 
+    let f = functions[func - 1];
+
     while (melodyTime < time) {
-        if (func == 1) {
-            if (sign == 0) {
-                melodyString = String(Math.pow(numbers, 2));
-            } else {
-                melodyString = Math.pow(numbers, 2).toFixed(sign);
-            }
-        } else if (func == 2) {
-            melodyString = Math.abs(Math.pow(numbers, 0.5)).toFixed(sign);
-        } else if (func == 3) {
-            if (numbers == 0) {
-                numbers += step;
-            }
-            melodyString = Math.abs(1 / numbers).toFixed(sign);
+        // if (func == 1) {
+        //     if (sign == 0) {
+        //         melodyString = String(Math.pow(numbers, 2));
+        //     } else {
+        //         melodyString = Math.pow(numbers, 2).toFixed(sign);
+        //     }
+        // } else if (func == 2) {
+        //     melodyString = Math.abs(Math.pow(numbers, 0.5)).toFixed(sign);
+        // } else if (func == 3) {
+        //     if (numbers == 0) {
+        //         numbers += step;
+        //     }
+        //     melodyString = Math.abs(1 / numbers).toFixed(sign);
+        // }
+        if(func == 3 && numbers == 0){
+            numbers += step;
         }
+        melodyString = Math.abs(f(numbers)).toFixed(sign);
+
         if (sign == 0) {
             melodyString += ".";
         }

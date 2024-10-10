@@ -6,4 +6,4 @@
 // let m = document.querySelectorAll(".dwSJ2e");
 // let m2 = [];
 // m.forEach(item => m2.push(item.innerHTML));
-console.log(Math.cbrt(4, 3));
+console.log((256).toFixed(0));
