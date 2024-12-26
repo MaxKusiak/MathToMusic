@@ -8,6 +8,7 @@ let step = 0;
 let isBassAvailable = true;
 let time = 0, melodyTime = 0;
 let temp = [0, 0, 0, 0, 0, 0, 0, 0];
+// let tempSignature = 0;
 // let allNotes = [196, 207, 220, 233.08, 246.96,        // мала 5
 //     261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392, 415.3, 440, 466.16, 493.88,   // перша 12
 //     523.25, 554.36, 587.32, 622.26, 659.26, 698.46, 739.98, 784, 830.6, 880, 932.32];  // друга 11
@@ -236,6 +237,80 @@ document.querySelector(".playButton").addEventListener('click', () => {
     }
 });
 
+// document.querySelector(".playButton").addEventListener('click', () => {
+//     func = document.querySelectorAll(".func").map((item) => {return parseInt(item.value)});
+//     gamma = document.querySelectorAll(".gamma").map((item) => {return item.value});
+//     mode = document.querySelectorAll(".mode").map((item) => {return parseInt(item.value)});
+//     time = document.querySelectorAll(".time").map((item) => {return parseInt(item.value) * 1000});
+//     time.forEach((item) => {
+//         if(item < 0){
+//             errorString += "Time can't be less than zero.<br>";
+//         }else if(Number.isNaN(item)){
+//             errorString += "Time must be a number.<br>";
+//         }
+//     });
+//     numbers = document.querySelectorAll(".numbers").map((item) => {return parseFloat(item.value)});
+//     numbers.forEach((item) => {
+//         if(Number.isNaN(item)){
+//             errorString += "Lower limit of the input data must be a number.<br>";
+//         }
+//     });
+//     numbers1 = numbers;
+//     step = document.querySelectorAll(".step").map((item) => {return parseFloat(item.value)});
+//     step.forEach((item) => {
+//         if(Number.isNaN(item)){
+//             errorString += "Step must be a number.<br>";
+//         }
+//     });
+//     sign = document.querySelectorAll(".sign").map((item) => {return parseInt(item.value)});
+//     if(Number.isNaN(sign)){
+//         errorString += "Sign must be a number.<br>";
+//     }else if(sign < 0){
+//         errorString += "Sign can't be less than zero.<br>";
+//     }
+//     timeSignature = document.querySelectorAll(".timeSignature").map((item) => {return parseInt(item.value)});
+//     volume = document.querySelectorAll(".volume").map((item) => {return parseInt(item.value)});
+//     tempSignature = document.querySelectorAll(".temp").map((item) => {return parseInt(60000 / parseInt(item.value))});
+//     for(let k = 0; k < tempSignature.length; k++){
+//         if(Number.isNaN(tempSignature[k])){
+//             errorString += "Temp must be a number.<br>";
+//         }else if(tempSignature[k] < 1){
+//             errorString += "Temp can't be less than one.<br>";
+//         }else{
+//             temp[k][0] = parseInt(temp[k][2] / 4);
+//             temp[k][1] = parseInt(temp[k][2] / 2);
+//             temp[k][2] = tempSignature[k];
+//             temp[k][3] = temp[k][2] * 2;
+//             temp[k][4] = temp[k][0] + temp[k][1];
+//             temp[k][5] = temp[k][2] + temp[k][0];
+//             temp[k][6] = temp[k][2] + temp[k][1];
+//             temp[k][7] = temp[k][2] + temp[k][1] + temp[k][0];
+//         }
+//     }
+//     // console.log(func, gamma, mode, time, numbers, step, sign, timeSignature, volume, temp[2]);
+//     if(errorString != ""){
+//         // canPlay = false;
+//         document.querySelector(".errorText").style.display = "flex";
+//         document.querySelector(".errorText").innerHTML = errorString;
+//         errorString = "";
+//     }else{
+//         // canPlay = true;
+//         document.querySelector(".errorText").style.display = "none";
+//         document.querySelector(".errorText").innerHTML = "";
+//         MIDI.loadPlugin({
+//             soundfontUrl: "./soundfont/",
+//             instruments: ["acoustic_grand_piano", "synth_drum"],
+//             onprogress: function (state, progress) {
+//                 console.log(state, progress);
+//             },
+//             onsuccess: function () {
+//                 MIDI.programChange(0, MIDI.GM.byName["acoustic_grand_piano"].number);
+//                 play();
+//             }
+//         });
+//     }
+// });
+
 // починає грати мелодію
 function playNoteWithDelay(note, duration) {
     return new Promise((resolve) => {
@@ -277,10 +352,28 @@ function play() {
     melodyTime = 0;
     gammaInd = -1;
     globalI = 0;
+    // modes = [[0, 2, 4, 5, 7, 9, 11, 12, 14, 16],  
+    //          [0, 2, 3, 5, 7, 8, 10, 12, 14, 15]];
     modes = [[0, 2, 4, 5, 7, 9, 11, 12, 14, 16],  
              [0, 2, 3, 5, 7, 8, 10, 12, 14, 15]];
     t = 0;
-
+    
+    // gamma.forEach((item) => {
+    //     if (mainTones.indexOf(item) != -1) {
+    //         gammaInd.push(mainTones.indexOf(item));
+    //     } else if (mainTonesB1.indexOf(item) != -1) {
+    //         gammaInd.push(mainTonesB1.indexOf(item));
+    //     } else if (mainTonesB2.indexOf(item) != -1) {
+    //         gammaInd.push(mainTonesB1.indexOf(item));
+    //     } else if (mainTonesD1.indexOf(item) != -1) {
+    //         gammaInd.push(mainTonesD1.indexOf(item));
+    //     } else if (mainTonesD2.indexOf(item) != -1) {
+    //         gammaInd.push(mainTonesD2.indexOf(item));
+    //     } else {
+    //         console.log("Error");
+    //     }
+    //     modes[mode - 1] = modes[mode - 1].map(item => { return item + gammaInd });
+    // });
     if (mainTones.indexOf(gamma) != -1) {
         gammaInd = mainTones.indexOf(gamma);
     } else if (mainTonesB1.indexOf(gamma) != -1) {

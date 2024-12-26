@@ -22,113 +22,202 @@
 	<!-- <input class="proMode" type="text" placeholder='Activate "pro mode"? (1 - yes, 2 - no)'> -->
     <!-- <input class="func" type="text" placeholder='Enter which function you want to hear. (1 - x^2, 2 - x^0.5, 3 - 1/x)'> -->
 	<div class="title1 title">Math to Music</div>
-
-	<div class="inputs">
-		<div class="block">
-			<span class="text">Choose which function you want to hear:</span>
-			<select class="func">
-				<option value="1">x&sup2;</option>
-				<option value="2">&radic;x</option>
-				<option value="3">1/x</option>
-				<option value="4">|x|</option>
-				<option value="5">sin(x)</option>
-				<option value="6">cos(x)</option>
-				<option value="7">&#8731;x</option>
-			</select>
+	<div class="firstInstrument instrument">
+		<div class="inputs">
+			<div class="block">
+				<span class="text">Choose which function you want to hear:</span>
+				<select class="func">
+					<option value="1">x&sup2;</option>
+					<option value="2">&radic;x</option>
+					<option value="3">1/x</option>
+					<option value="4">|x|</option>
+					<option value="5">sin(x)</option>
+					<option value="6">cos(x)</option>
+					<option value="7">&#8731;x</option>
+				</select>
+			</div>
+			
+			<!-- <input class="gamma" type="text" placeholder='Enter the main tone.'> -->
+			<div class="block">
+				<span class="text">Choose the main tone:</span>
+				<select class="gamma">
+					<option value="C">C</option>
+					<option value="D">D</option>
+					<option value="E">E</option>
+					<option value="F">F</option>
+					<option value="G">G</option>
+					<option value="A">A</option>
+					<option value="B">B</option>
+					<option value="CIS">Cis</option>
+					<option value="DIS">Dis</option>
+					<option value="EIS">Eis</option>
+					<option value="FIS">Fis</optiinstrumenton>
+					<option value="GIS">Gis</option>
+					<option value="AIS">Ais</option>
+					<option value="BIS">Bis</option>
+					<option value="CES">Ces</option>
+					<option value="DES">Des</option>
+					<option value="ES">Es</option>
+					<option value="FES">Fes</option>
+					<option value="GES">Ges</option>
+					<option value="AS">As</option>
+					<option value="BES">Bes</option>
+				</select>
+			</div>
+			<!-- <input class="mode" type="text" placeholder='Choose a mode. (1 - major, 2 - minor)'> -->
+			<div class="block">
+				<span class="text">Choose a mode:</span>
+				<select class="mode">
+					<option value="1">major</option>
+					<option value="2">minor</option>
+				</select>
+			</div>
+			
+			<div class="block">
+				<span class="text">Enter the duration of the melody (in seconds):</span>
+				<input class="time" type="text">
+			</div>
+			<div class="block">
+				<span class="text">Enter the lower limit of the input data:</span>
+				<input class="numbers" type="text">
+			</div>
+			<div class="block">
+				<span class="text">Enter the step by which the number will change:</span>
+				<input class="step" type="text">
+			</div>
+			<div class="block">
+				<span class="text">Enter to which sign to round the result:</span>
+				<input class="sign" type="text">
+			</div>
+			<!-- <input class="timeSignature" type="text" placeholder='Enter the time signature. (1 - 2/4, 2 - 3/4, 3 - 4/4, 4 - 6/8)'> -->
+			<div class="block">
+				<span class="text">Enter the time signature.</span>
+				<select class="timeSignature">
+					<option value="1">2/4</option>
+					<option value="2">3/4</option>
+					<option value="3">4/4</option>
+					<option value="4">6/8</option>
+				</select>
+			</div>
+			<!-- <input class="volume" type="text" placeholder='Enter volume (1 - very quiet, 127 - very loud).'> -->
+			<div class="block">
+				<span class="text">Enter volume. <span class="volumeShow">Volume: 40</span></span>
+				<input class="volume slider-progress" type="range" min="1" max="127" value="40">
+			</div>
+			<div class="block">
+				<span class="text">Enter tempo:</span>
+				<input class="temp" type="text">
+			</div>
+			<input type="button" class="playButton button" value="Play">
+			<input type="button" class="stopButton button" value="Stop" onclick="stopAudioFunc()">
+			<!-- <input type="button" class="button" value="Play"> -->
 		</div>
-		
-		<!-- <input class="gamma" type="text" placeholder='Enter the main tone.'> -->
-		<div class="block">
-			<span class="text">Choose the main tone:</span>
-			<select class="gamma">
-				<option value="C">C</option>
-				<option value="D">D</option>
-				<option value="E">E</option>
-				<option value="F">F</option>
-				<option value="G">G</option>
-				<option value="A">A</option>
-				<option value="B">B</option>
-				<option value="CIS">Cis</option>
-				<option value="DIS">Dis</option>
-				<option value="EIS">Eis</option>
-				<option value="FIS">Fis</option>
-				<option value="GIS">Gis</option>
-				<option value="AIS">Ais</option>
-				<option value="BIS">Bis</option>
-				<option value="CES">Ces</option>
-				<option value="DES">Des</option>
-				<option value="ES">Es</option>
-				<option value="FES">Fes</option>
-				<option value="GES">Ges</option>
-				<option value="AS">As</option>
-				<option value="BES">Bes</option>
-			</select>
-		</div>
-
-		<!-- <input class="mode" type="text" placeholder='Choose a mode. (1 - major, 2 - minor)'> -->
-		<div class="block">
-			<span class="text">Choose a mode:</span>
-			<select class="mode">
-				<option value="1">major</option>
-				<option value="2">minor</option>
-			</select>
-		</div>
-		
-		<div class="block">
-			<span class="text">Enter the duration of the melody (in seconds):</span>
-			<input class="time" type="text">
-		</div>
-
-		<div class="block">
-			<span class="text">Enter the lower limit of the input data:</span>
-			<input class="numbers" type="text">
-		</div>
-
-		<div class="block">
-			<span class="text">Enter the step by which the number will change:</span>
-			<input class="step" type="text">
-		</div>
-
-		<div class="block">
-			<span class="text">Enter to which sign to round the result:</span>
-			<input class="sign" type="text">
-		</div>
-
-		<!-- <input class="timeSignature" type="text" placeholder='Enter the time signature. (1 - 2/4, 2 - 3/4, 3 - 4/4, 4 - 6/8)'> -->
-		<div class="block">
-			<span class="text">Enter the time signature.</span>
-			<select class="timeSignature">
-				<option value="1">2/4</option>
-				<option value="2">3/4</option>
-				<option value="3">4/4</option>
-				<option value="4">6/8</option>
-			</select>
-		</div>
-
-		<!-- <input class="volume" type="text" placeholder='Enter volume (1 - very quiet, 127 - very loud).'> -->
-		<div class="block">
-			<span class="text">Enter volume. <span class="volumeShow">Volume: 40</span></span>
-			<input class="volume slider-progress" type="range" min="1" max="127" value="40">
-		</div>
-
-		<div class="block">
-			<span class="text">Enter tempo:</span>
-			<input class="temp" type="text">
-		</div>
-
-		<input type="button" class="playButton button" value="Play">
-		<input type="button" class="stopButton button" value="Stop" onclick="stopAudioFunc()">
-		<!-- <input type="button" class="button" value="Play"> -->
-
-	</div>
-
-	<div class="global">
-		<div class="title2 title">Math to Music</div>
-		<div class="graphBlock">
-			<b><div class="errorText"></div></b>
-			<canvas class="graph" width="958px" height="500px"></canvas>
+		<div class="global">
+			<div class="title2 title">Math to Music</div>
+			<div class="graphBlock">
+				<b><div class="errorText"></div></b>
+				<canvas class="graph" width="958px" height="500px"></canvas>
+			</div>
 		</div>
 	</div>
+
+	<!-- <div class="secondInstrument instrument">
+		<div class="inputs">
+			<div class="block">
+				<span class="text">Choose which function you want to hear:</span>
+				<select class="func">
+					<option value="1">x&sup2;</option>
+					<option value="2">&radic;x</option>
+					<option value="3">1/x</option>
+					<option value="4">|x|</option>
+					<option value="5">sin(x)</option>
+					<option value="6">cos(x)</option>
+					<option value="7">&#8731;x</option>
+				</select>
+			</div>
+			
+			<div class="block">
+				<span class="text">Choose the main tone:</span>
+				<select class="gamma">
+					<option value="C">C</option>
+					<option value="D">D</option>
+					<option value="E">E</option>
+					<option value="F">F</option>
+					<option value="G">G</option>
+					<option value="A">A</option>
+					<option value="B">B</option>
+					<option value="CIS">Cis</option>
+					<option value="DIS">Dis</option>
+					<option value="EIS">Eis</option>
+					<option value="FIS">Fis</option>
+					<option value="GIS">Gis</option>
+					<option value="AIS">Ais</option>
+					<option value="BIS">Bis</option>
+					<option value="CES">Ces</option>
+					<option value="DES">Des</option>
+					<option value="ES">Es</option>
+					<option value="FES">Fes</option>
+					<option value="GES">Ges</option>
+					<option value="AS">As</option>
+					<option value="BES">Bes</option>
+				</select>
+			</div>
+
+			<div class="block">
+				<span class="text">Choose a mode:</span>
+				<select class="mode">
+					<option value="1">major</option>
+					<option value="2">minor</option>
+				</select>
+			</div>
+			
+			<div class="block">
+				<span class="text">Enter the duration of the melody (in seconds):</span>
+				<input class="time" type="text">
+			</div>
+
+			<div class="block">
+				<span class="text">Enter the lower limit of the input data:</span>
+				<input class="numbers" type="text">
+			</div>
+
+			<div class="block">
+				<span class="text">Enter the step by which the number will change:</span>
+				<input class="step" type="text">
+			</div>
+
+			<div class="block">
+				<span class="text">Enter to which sign to round the result:</span>
+				<input class="sign" type="text">
+			</div>
+
+			<div class="block">
+				<span class="text">Enter the time signature.</span>
+				<select class="timeSignature">
+					<option value="1">2/4</option>
+					<option value="2">3/4</option>
+					<option value="3">4/4</option>
+					<option value="4">6/8</option>
+				</select>
+			</div>
+
+			<div class="block">
+				<span class="text">Enter volume. <span class="volumeShow">Volume: 40</span></span>
+				<input class="volume slider-progress" type="range" min="1" max="127" value="40">
+			</div>
+
+			<div class="block">
+				<span class="text">Enter tempo:</span>
+				<input class="temp" type="text">
+			</div>
+		</div>
+
+		<div class="global">
+			<div class="graphBlock">
+				<canvas class="graph" width="958px" height="500px"></canvas>
+			</div>
+		</div>
+	</div> -->
 
     <script src="../../scripts/script.js"></script>
 </body>
