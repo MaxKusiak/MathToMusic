@@ -19,16 +19,16 @@ body {
     flex-direction: column;
     padding-left: 50px; */
   background-color: #4A4458;
-  /* display: flex; */
+  display: flex;
   font-family: 'Itim';
   padding: 18px 0 18px 18px;
 }
-.instrument{
+/* .instrument{
   display: flex;
 }
 .secondInstrument{
   margin-top: 30px;
-}
+} */
 
 .global {
   display: flex;
