@@ -24,7 +24,7 @@ let mainTonesD2 = ["", "GIS", "", "AIS", "", "BIS", "CIS", "", "DIS", "", "EIS",
 let mainTonesB2 = ["", "AS", "", "BES", "CES", "", "DES", "", "ES", "FES", "", "GES"];
 let notesInLetters = ["0G", "0G#", "0A", "0A#", "0B", "1C", "1C#", "1D", "1D#", "1E", "1F", "1F#", "1G", "1G#", "1A", "1A#", "1B", "2C", "2C#", "2D", "2D#", "2E", "2F", "2F#", "2G", "2G#", "2A", "2A#"];
 let signatureNumbers = [0.25, 0.5, 1, 2, 0.75, 1.25, 1.5, 1.75];
-let functions = [x => x**2, x => x**0.5, x => 1/x, x => Math.abs(x), x => Math.sin(x), x => Math.cos(x), x => Math.cbrt(x)];
+let functions = [x => x, x => x**2, x => x**0.5, x => 1/x, x => Math.abs(x), x => Math.sin(x), x => Math.cos(x), x => Math.cbrt(x)];
 let m = [];
 
 document.querySelector(".volume").addEventListener("change", (event) => {
@@ -97,6 +97,7 @@ function drawGraph(number1, number2, step){
                 ctx.moveTo(j*z + a*z, -(y(j)*z + b*z));
                 ctx.lineTo((j - 0.1)*z + a*z, -(y(j - 0.1)*z + b*z));
         }
+        console.log("+");
     }
     t++;
     ctx.stroke();
@@ -394,7 +395,7 @@ function play() {
     } else {
         timeSignature -= 1;
     }
-    if (func == 2) {
+    if (func == 3) {
         if (numbers < 0) {
             numbers = -numbers;
             numbers1 = numbers;
@@ -402,7 +403,7 @@ function play() {
         if (step < 0) {
             step = -step;
         }
-    } else if (func == 3) {
+    } else if (func == 4) {
         if (numbers == 0 && step > 0) {
             numbers = 1;
             numbers1 = 1;
@@ -429,7 +430,7 @@ function play() {
         //     }
         //     melodyString = Math.abs(1 / numbers).toFixed(sign);
         // }
-        if(func == 3 && numbers == 0){
+        if(func == 4 && numbers == 0){
             numbers += step;
         }
         melodyString = Math.abs(f(numbers)).toFixed(sign);
